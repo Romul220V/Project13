@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 
 const cardSchema = new mongoose.Schema({
   name: {
-    type: String, // имя — это строка
-    required: true, // оно должно быть у каждого пользователя, так что имя — обязательное поле
-    minlength: 2, // минимальная длина имени — 2 символа
-    maxlength: 30, // а максимальная — 30 символов
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
-  link: { // у пользователя есть имя — опишем требования к имени в схеме:
+  link: {
     type: String,
     validate: {
       validator: function(v) {
@@ -16,11 +16,11 @@ const cardSchema = new mongoose.Schema({
       },
       message: props => `${props.value} is not an url`
     },
-    required: true, // оно должно быть у каждого пользователя, так что имя — обязательное поле
+    required: true,
   },
-  owner: { // у пользователя есть имя — опишем требования к имени в схеме:
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true, // оно должно быть у каждого пользователя, так что имя — обязательное поле
+    required: true,
   },
   likes: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +31,6 @@ const cardSchema = new mongoose.Schema({
     Date: Date.now,
     // required: true,
   },
-  about: String, // тип — String
+  about: String,
 });
 module.exports = mongoose.model('user', cardSchema);

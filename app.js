@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
-//const users = require('./routes/users');
+const users = require('./routes/users');
 const cards = require('./routes/cards');
 const errorpage = require('./routes/404');
 
@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false
 });
 
-app.use('/users', require('./routes/users'));
+app.use('/', users);
 
 app.use((req, res, next) => {
   req.user = {
@@ -29,8 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//app.use('/', cards);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', cards);
 app.use('/', errorpage);
 app.listen(PORT, () => {
   console.log('Ссылка на сервер:');
