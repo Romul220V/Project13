@@ -8,7 +8,7 @@ module.exports.getCards = (req, res) => {
 };
 
 module.exports.delCardId = (req, res) => {
-  Card.findOneAndRemove({_id:req.params.id})
+  Card.findOneAndRemove({_id: req.params.cardId})
   .then(card => res.send({ data: card }))
   .catch(err => res.status(404).send({ message: 'Нет пользователя с таким id' }));
 };
