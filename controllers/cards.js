@@ -28,5 +28,4 @@ module.exports.createCard = (req, res) => {
         res.status(500).send({ message: 'Ошибка сервера' });
       }
     });
-  console.log(req.user._id);
 };
