@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const cardSchema = new mongoose.Schema({
@@ -11,10 +10,11 @@ const cardSchema = new mongoose.Schema({
   link: {
     type: String,
     validate: {
-      validator: function(v) {
+      validator(v) {
+        // eslint-disable-next-line no-useless-escape
         return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v);
       },
-      message: props => `${props.value} is not an url`
+      message: (props) => `${props.value} is not an url`,
     },
     required: true,
   },
@@ -24,13 +24,14 @@ const cardSchema = new mongoose.Schema({
   },
   likes: {
     type: mongoose.Schema.Types.ObjectId,
-    //required: true,
+    // required: true,
     default: 0,
   },
   createdAt: {
-    Date: Date.now,
+    type: Date,
+    default: Date.now,
     // required: true,
   },
   about: String,
 });
-module.exports = mongoose.model('user', cardSchema);
+module.exports = mongoose.model('card', cardSchema);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-console.log("test1");
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -16,12 +16,13 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     validate: {
-      validator: function (v) {
+      validator(v) {
+        // eslint-disable-next-line no-useless-escape
         return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v);
       },
-      message: props => `${props.value} is not an picture`
+      message: (props) => `${props.value} is not an picture`,
     },
     required: true,
-  }
+  },
 });
 module.exports = mongoose.model('user', userSchema);
